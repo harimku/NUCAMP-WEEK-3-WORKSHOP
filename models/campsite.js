@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema;  //using shorthand (not required)
 
 require('mongoose-currency').loadType(mongoose);
 const Currency = mongoose.Types.Currency;
 
+// Create a schema (this is for a subdocument)
 const commentSchema = new Schema({
     rating: {
         type: Number,
@@ -23,6 +24,7 @@ const commentSchema = new Schema({
     timestamps: true
 });
 
+// Create a schema
 const campsiteSchema = new Schema({
     name: {
         type: String,
@@ -50,11 +52,12 @@ const campsiteSchema = new Schema({
         type: Boolean,
         default: false
     },
-    comments: [commentSchema]
-}, {
+    comments: [commentSchema]  //Every campsite document can now store multiple comment documents stored within an array
+}, {  //second, optional argument for configuration options
     timestamps: true
 });
 
-const Campsite = mongoose.model('Campsite', campsiteSchema);
+// Create a model using the schema
+const Campsite = mongoose.model('Campsite', campsiteSchema); //mongoose.model() returns a constructor function
 
 module.exports = Campsite;
